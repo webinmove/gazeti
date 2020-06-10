@@ -1,0 +1,60 @@
+{
+  "name": "@webinmove/gazeti",
+  "version": "1.0.0",
+  "description": "A basic Logger object that force a logging format for a correct logstash extraction",
+  "main": "src/index.js",
+  "scripts": {
+    "format": "semistandard --fix",
+    "test:spec": "NODE_ENV=test mocha --recursive",
+    "test:lint": "semistandard --verbose | snazzy",
+    "test:cover": "nyc --reporter=lcov --reporter=text-summary npm run test:spec",
+    "test:coveralls": "nyc npm run test:spec && nyc report --reporter=text-lcov | coveralls",
+    "test": "npm run test:lint && npm run test:cover",
+    "test:ci": "npm run test:lint && npm run test:coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webinmove/gazeti.git"
+  },
+  "keywords": [
+    "log",
+    "logger"
+  ],
+  "author": "@webinmove",
+  "contributors": [
+    "Olivier Cuypers <oliviercuyp@gmail.com>",
+    "Louis Borsu <sat@satprod.net>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webinmove/gazeti/issues"
+  },
+  "homepage": "https://github.com/webinmove/gazeti#readme",
+  "dependencies": {
+    "pino": "^5.13.3",
+    "pino-pretty": "^3.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "semistandard": "^14.2.0",
+    "sinon": "^7.4.2",
+    "snazzy": "^8.0.0"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ]
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}
