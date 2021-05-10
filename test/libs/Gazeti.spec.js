@@ -114,6 +114,34 @@ describe('Class Gazeti', () => {
       log.info('TEST_EVENT');
       destination.end();
     });
+
+    it('should log with log labels instead of levels format', (done) => {
+      const destination = destinationStream(outputText => {
+        const output = JSON.parse(outputText);
+
+        expect(output).to.deep.equal({
+          level: 'info',
+          time: '2019-01-01T00:00:00.000Z',
+          hostname,
+          pid,
+          version,
+          name: '@webinmove/gazeti',
+          module: 'test',
+          event: 'TEST_EVENT',
+          indexed: { val: 1 },
+          raw: { val: '2' },
+          v: 1
+        });
+
+        done();
+      });
+      const logger = new Gazeti({ destination, useLabels: true });
+
+      const log = logger.create({ module: 'test' });
+
+      log.info('TEST_EVENT', { val: 1 }, { val: '2' });
+      destination.end();
+    });
   });
 
   describe('Logging error stack', () => {
