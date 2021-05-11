@@ -14,7 +14,7 @@ module.exports = class Gazeti {
     destination = pino.destination(1),
     messageErrorLength = 0, // 0 means no limit
     pretty = false,
-    useLabels
+    useLabels = false
   } = {}) {
     const { projectName, buildNumber, commit } = versionInfo;
 
