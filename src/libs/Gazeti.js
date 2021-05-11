@@ -13,7 +13,8 @@ module.exports = class Gazeti {
     stackLevel = 'error',
     destination = pino.destination(1),
     messageErrorLength = 0, // 0 means no limit
-    pretty = false
+    pretty = false,
+    useLabels = false
   } = {}) {
     const { projectName, buildNumber, commit } = versionInfo;
 
@@ -29,7 +30,8 @@ module.exports = class Gazeti {
       },
       level: logLevel || 'info',
       timestamp: () => `,"time":"${new Date().toISOString()}"`,
-      prettyPrint: pretty ? { colorize: true } : false
+      prettyPrint: pretty ? { colorize: true } : false,
+      useLevelLabels: useLabels
     }, destination);
 
     this.messageErrorLength = messageErrorLength;

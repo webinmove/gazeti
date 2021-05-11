@@ -12,6 +12,7 @@ A basic Logger object that force a logging format for a correct logstash extract
 LOG_LEVEL # (optional) Defines you log level, defaut 'info'
 LOG_STACK_LEVEL # (optional) Defines minimum level to log stack, default 'error'
 LOG_PRETTY # (optional) Defines pretty print output, default false
+LOG_LABELS # (optional) Defines if log labels should be used instead of levels, default false
 LOG_ERROR_MESSAGE_LENGTH # (optional) Defines error message max length output, default 0 (no limit)
 ```
 
