@@ -1,6 +1,6 @@
 {
   "name": "@webinmove/gazeti",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A basic Logger object that force a logging format for a correct logstash extraction",
   "main": "src/index.js",
   "scripts": {
