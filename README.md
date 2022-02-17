@@ -14,6 +14,7 @@ LOG_STACK_LEVEL # (optional) Defines minimum level to log stack, default 'error'
 LOG_PRETTY # (optional) Defines pretty print output, default false
 LOG_LABELS # (optional) Defines if log labels should be used instead of levels, default false
 LOG_ERROR_MESSAGE_LENGTH # (optional) Defines error message max length output, default 0 (no limit)
+BUILD_NUMBER # (optional) Can be used if we do not use the version.json (see below)
 ```
 
 *Notes:*
@@ -40,8 +41,8 @@ but also from a `version.json` file if present at the root of the project.
 ## Usage
 
 ```js
-var log = require('@webinmove/gazeti')
-  .create({ module: 'files-controller' });
+const log = require('@webinmove/gazeti')
+  .create({ module: module.id });
 
 log.debug('event', {
   user: {
@@ -51,7 +52,8 @@ log.debug('event', {
   user: {
     name: 'Someone'
   }
-});
+},
+'TRACE-ID-XXXXXXX');
 ```
 
 The indexed and raw parameters are optional.
@@ -60,11 +62,11 @@ They can be or they can contain an `Error` object in a error field which will be
 Here are the different logging methods:
 
 ```js
-log.debug(event, indexed, raw);
-log.info(event, indexed, raw);
-log.warn(event, indexed, raw);
-log.error(event, indexed, raw);
-log.fatal(event, indexed, raw);
+log.debug(event, indexed, raw, traceId);
+log.info(event, indexed, raw, traceId);
+log.warn(event, indexed, raw, traceId);
+log.error(event, indexed, raw, traceId);
+log.fatal(event, indexed, raw, traceId);
 ```
 
 ## Output
@@ -72,7 +74,7 @@ log.fatal(event, indexed, raw);
 With this code and a `version.json` file present:
 
 ```js
-log.error('ERROR_EVENT', { error: new Error('Some error') }, { foo: 'bar' });
+log.error('ERROR_EVENT', { error: new Error('Some error') }, { foo: 'bar' }, 'TRACE-ID-XXXXXXX');
 ```
 
 ```json
@@ -98,6 +100,7 @@ log.error('ERROR_EVENT', { error: new Error('Some error') }, { foo: 'bar' });
   "raw": {
     "foo": "bar"
   },
+  "traceId": "TRACE-ID-XXXXXXX",
   "v":1
 }
 ```

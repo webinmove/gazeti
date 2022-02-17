@@ -16,7 +16,11 @@ module.exports = class Gazeti {
     pretty = false,
     useLabels = false
   } = {}) {
-    const { projectName, buildNumber, commit } = versionInfo;
+    let { projectName, buildNumber, commit } = versionInfo;
+
+    if (!buildNumber) {
+      buildNumber = process.env.BUILD_NUMBER;
+    }
 
     this.main = pino({
       name: packageInfo.name,
@@ -90,11 +94,12 @@ module.exports = class Gazeti {
     return serialized;
   }
 
-  buildLog (logLevelindex, event, indexed = null, raw = null) {
+  buildLog (logLevelindex, event, indexed = null, raw = null, traceId = null) {
     const finalLog = {
       event,
       indexed: this.serializeError(logLevelindex, indexed),
-      raw: this.serializeError(logLevelindex, raw)
+      raw: this.serializeError(logLevelindex, raw),
+      traceId
     };
 
     return finalLog;
@@ -104,8 +109,8 @@ module.exports = class Gazeti {
     const childLogger = this.main.child(info);
 
     return levels.reduce((finalLogger, logLevel, logLevelindex) => {
-      finalLogger[logLevel] = (event, data, meta) => {
-        childLogger[logLevel](this.buildLog(logLevelindex, event, data, meta));
+      finalLogger[logLevel] = (event, data, meta, traceId) => {
+        childLogger[logLevel](this.buildLog(logLevelindex, event, data, meta, traceId));
       };
 
       return finalLogger;

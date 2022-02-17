@@ -45,23 +45,23 @@ describe('Class Gazeti', () => {
     });
 
     it('creates a logger with a "debug" method having 3 arguments', () => {
-      expect(log.debug).to.have.lengthOf(3);
+      expect(log.debug).to.have.lengthOf(4);
     });
 
     it('creates a logger with a "info" method having 3 arguments', () => {
-      expect(log.info).to.have.lengthOf(3);
+      expect(log.info).to.have.lengthOf(4);
     });
 
     it('creates a logger with a "warn" method having 3 arguments', () => {
-      expect(log.warn).to.have.lengthOf(3);
+      expect(log.warn).to.have.lengthOf(4);
     });
 
     it('creates a logger with a "error" method having 3 arguments', () => {
-      expect(log.error).to.have.lengthOf(3);
+      expect(log.error).to.have.lengthOf(4);
     });
 
     it('creates a logger with a "fatal" method having 3 arguments', () => {
-      expect(log.fatal).to.have.lengthOf(3);
+      expect(log.fatal).to.have.lengthOf(4);
     });
   });
 
@@ -81,6 +81,7 @@ describe('Class Gazeti', () => {
           event: 'TEST_EVENT',
           indexed: { val: 1 },
           raw: { val: '2' },
+          traceId: null,
           v: 1
         });
 
@@ -103,6 +104,7 @@ describe('Class Gazeti', () => {
           '    event: "TEST_EVENT"',
           '    indexed: null',
           '    raw: null',
+          '    traceId: null',
           ''
         ]);
         done();
@@ -130,6 +132,7 @@ describe('Class Gazeti', () => {
           event: 'TEST_EVENT',
           indexed: { val: 1 },
           raw: { val: '2' },
+          traceId: null,
           v: 1
         });
 
