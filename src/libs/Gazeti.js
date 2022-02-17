@@ -16,7 +16,11 @@ module.exports = class Gazeti {
     pretty = false,
     useLabels = false
   } = {}) {
-    const { projectName, buildNumber, commit } = versionInfo;
+    let { projectName, buildNumber, commit } = versionInfo;
+
+    if (!buildNumber) {
+      buildNumber = process.env.BUILD_NUMBER;
+    }
 
     this.main = pino({
       name: packageInfo.name,

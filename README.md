@@ -14,6 +14,7 @@ LOG_STACK_LEVEL # (optional) Defines minimum level to log stack, default 'error'
 LOG_PRETTY # (optional) Defines pretty print output, default false
 LOG_LABELS # (optional) Defines if log labels should be used instead of levels, default false
 LOG_ERROR_MESSAGE_LENGTH # (optional) Defines error message max length output, default 0 (no limit)
+BUILD_NUMBER # (optional) Can be used if we do not use the version.json (see below)
 ```
 
 *Notes:*
